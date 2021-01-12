@@ -1,6 +1,9 @@
-// Relais Steuerpin an Arduino 8
 const int relaisPin = 3;
- 
+const int ledRed = 11;
+const int ledYellow = 12;
+const int ledGreen = 13;
+
+
 void setup() {
   Serial.begin(9600);
   pinMode(ledRed, OUTPUT);
