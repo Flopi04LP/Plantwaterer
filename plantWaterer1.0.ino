@@ -2,6 +2,8 @@ const int relaisPin = 3;
 const int ledRed = 11;
 const int ledYellow = 12;
 const int ledGreen = 13;
+#define SensorPin A0 
+float sensorValue = 0; 
 
 
 void setup() {
