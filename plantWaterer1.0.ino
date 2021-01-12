@@ -32,6 +32,10 @@ void loop() {
  waterValue = waterValue/100.0; 
  Serial.println("Water level:"); 
  Serial.println(waterValue); 
+  
+  if (){
+    
+  }
  
  delay(30); 
 
