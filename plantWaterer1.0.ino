@@ -10,16 +10,13 @@ float waterValue = 0;
 
 void setup() {
   Serial.begin(9600);
-  for (int i = 0; i <= 5; i++) 
- { 
   pinMode(ledRed, OUTPUT);
   pinMode(ledYellow, OUTPUT);
   pinMode(ledGreen, OUTPUT);
   pinMode(relaisPin, OUTPUT);
-  delay(500);
-  }
   Serial.println("Waterplanter 3000 started");
   pinMode(relaisPin, OUTPUT);
+  digitalWrite(ledRed, HIGH);
 }
  
 void loop() {
