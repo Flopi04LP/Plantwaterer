@@ -1,11 +1,14 @@
 const int relaisPin = 3;
-const int ledRed = 11;
-const int ledYellow = 12;
-const int ledGreen = 13;
+const int ledRed = 7;
+const int ledYellow = 8;
+const int ledGreen = 9;
+const int ledrefill = 6;
 #define MoisturePin A0 
 #define WaterPin A5
 float moistureValue = 0; 
 float waterValue = 0;
+#define plantneedswater 700
+#define plantneedswatersoon 600
 
 
 void setup() {
@@ -14,9 +17,8 @@ void setup() {
   pinMode(ledYellow, OUTPUT);
   pinMode(ledGreen, OUTPUT);
   pinMode(relaisPin, OUTPUT);
-  Serial.println("Waterplanter 3000 started");
   pinMode(relaisPin, OUTPUT);
-  digitalWrite(ledRed, HIGH);
+  Serial.println("Waterplanter 3000 started");
 }
  
 void loop() {
@@ -26,18 +28,49 @@ void loop() {
    waterValue = waterValue + analogRead(WaterPin); 
    delay(1); 
  } 
+ 
+ 
  moistureValue = moistureValue/100.0;
  Serial.println("Moisture:"); 
  Serial.println(moistureValue); 
  waterValue = waterValue/100.0; 
  Serial.println("Water level:"); 
  Serial.println(waterValue); 
-  
-  if (){
-    
-  }
  
- delay(30); 
+
+ if(moistureValue >= plantneedswater)
+ {
+  digitalWrite(ledGreen, LOW);
+  digitalWrite(ledYellow, LOW);
+  digitalWrite(ledRed, HIGH);
+  Serial.println("Starting watering");
+  digitalWrite(relaisPin, LOW);
+  delay(500);
+  digitalWrite(relaisPin, HIGH);
+  delay(5000);
+ }else
+ {
+  Serial.println("Plant ok");
+  digitalWrite(ledRed, LOW);
+  digitalWrite(ledYellow, LOW);
+  digitalWrite(ledGreen, HIGH);
+ }
+
+ if(moistureValue >= plantneedswatersoon)
+ {
+  Serial.println("Plant needs water soon!");
+  digitalWrite(ledYellow, HIGH);
+  digitalWrite(ledRed, LOW);
+  digitalWrite(ledGreen, LOW);
+ }
+ else{
+  digitalWrite(ledRed, LOW);
+  digitalWrite(ledYellow, LOW);
+  digitalWrite(ledGreen, HIGH);
+ }
+  
+ 
+ delay(5000); 
 
  
 }
