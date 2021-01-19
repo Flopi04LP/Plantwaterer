@@ -2,20 +2,21 @@ const int relaisPin = 3;
 const int ledRed = 7;
 const int ledYellow = 8;
 const int ledGreen = 9;
-const int ledrefill = 6;
+const int ledRefill = 2;
 #define MoisturePin A0 
 #define WaterPin A5
 float moistureValue = 0; 
 float waterValue = 0;
 #define plantneedswater 700
 #define plantneedswatersoon 600
-
+#define watertankempty 100
 
 void setup() {
   Serial.begin(9600);
   pinMode(ledRed, OUTPUT);
   pinMode(ledYellow, OUTPUT);
   pinMode(ledGreen, OUTPUT);
+  pinMode(ledRefill, OUTPUT);
   pinMode(relaisPin, OUTPUT);
   pinMode(relaisPin, OUTPUT);
   Serial.println("Waterplanter 3000 started");
@@ -68,6 +69,15 @@ void loop() {
   digitalWrite(ledYellow, LOW);
   digitalWrite(ledGreen, HIGH);
  }
+
+if(waterValue <= watertankempty)
+{
+  digitalWrite(ledRefill, HIGH);
+  Serial.println("Watertank empty!");
+}else
+{
+  digitalWrite(ledRefill, LOW);
+}
   
  
  delay(5000); 
