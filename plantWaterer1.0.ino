@@ -43,43 +43,48 @@ void loop()
     // output the water level
     Serial.println("Water level:");
     Serial.println(waterValue);
-
+    
+    // the soil is too dry, water!
     if (moistureValue >= plantneedswater) {
         digitalWrite(ledGreen, LOW);
         digitalWrite(ledYellow, LOW);
         digitalWrite(ledRed, HIGH);
         Serial.println("Starting watering");
+        // turn on water
         digitalWrite(relaisPin, LOW);
         delay(500);
+        // turn off water
         digitalWrite(relaisPin, HIGH);
         delay(5000);
     }
+    // plant is ok
     else {
         Serial.println("Plant ok");
         digitalWrite(ledRed, LOW);
         digitalWrite(ledYellow, LOW);
         digitalWrite(ledGreen, HIGH);
     }
-
+    // plant needs water soon
     if (moistureValue >= plantneedswatersoon) {
         Serial.println("Plant needs water soon!");
         digitalWrite(ledYellow, HIGH);
         digitalWrite(ledRed, LOW);
         digitalWrite(ledGreen, LOW);
     }
+    // change the led to green
     else {
         digitalWrite(ledRed, LOW);
         digitalWrite(ledYellow, LOW);
         digitalWrite(ledGreen, HIGH);
     }
-
+    // if the water tank is nearly empty the red led turns on
     if (waterValue <= watertankempty) {
         digitalWrite(ledRefill, HIGH);
         Serial.println("Watertank empty!");
     }
+    // water tank ok
     else {
         digitalWrite(ledRefill, LOW);
     }
-
     delay(5000);
 }
