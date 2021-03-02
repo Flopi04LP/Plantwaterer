@@ -43,7 +43,7 @@ void loop()
     // output the water level
     Serial.println("Water level:");
     Serial.println(waterValue);
-    
+
     // the soil is too dry, water!
     if (moistureValue >= plantneedswater) {
         digitalWrite(ledGreen, LOW);
